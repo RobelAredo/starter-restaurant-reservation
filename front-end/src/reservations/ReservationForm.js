@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {createReservation} from "../utils/api";
+import Alert from "./Alert";
 
 export default function ReservationForm () {
   const intialForm = {first_name: "", last_name: "", mobile_number: "", reservation_date: "", reservation_time: "", people: 1};
   const [form, setForm] = useState(intialForm);
   const history = useHistory();
-  let errorMessage = "";
+  const [errorMessage, setErrorMessage] = useState("");
 
   function changeHandler ({target}) {
     setForm(form => ({...form, [target.name] : +target.value? +target.value : target.value}));
@@ -25,9 +26,10 @@ export default function ReservationForm () {
         const {reservation_date} = form;
         setForm({...intialForm});
         history.push(`/dashboard?date=${reservation_date}`);
-        errorMessage = "";
+        setErrorMessage("");
       } catch (error) {
-        errorMessage = error.message;
+        setErrorMessage(error.message);
+        console.log(errorMessage);
       }
     }
     addReservation();
@@ -37,8 +39,7 @@ export default function ReservationForm () {
   return (
     <>
       <br/>
-        {errorMessage}
-      <br/>
+      <Alert errorMessage={errorMessage} />
       <form onSubmit={sumbitHandler} className="form">
         <label htmlFor="first_name">
           First name:

@@ -6,10 +6,29 @@ function validReservation(req, res, next) {
   const fields = ["first_name", "last_name", "mobile_number", "reservation_date", "reservation_time", "people"];
   
   errorMessage = fields.reduce((acc, field) => {
-    if (field === "reservation_date" && !reservation[field]?.match(/\d{4}-(0[1-9]|1[0-2])-([0][1-9]|[12][0-9]|[3][01])/)) {
-        acc.push(field);
-    } else if (field === "reservation_time" && !reservation[field]?.match(/([0-9]|1[0-9]|2[0-3]):([0-6][0-9])/)) {
-        acc.push(field);
+    if (field === "reservation_date") {
+      let error = field;
+      const reservationDate = reservation[field];
+      const currentDate = (new Date).toISOString().split("T")[0];
+      if (!reservation[field]?.match(/^\d{4}-(0[1-9]|1[0-2])-([0][1-9]|[12][0-9]|[3][01])$/)) {
+        error += " must be formatted yyyy-mm-dd"
+      } else if (currentDate > reservationDate) {
+        error += " cannot be a past date";
+      } else if ((new Date(`${reservationDate} 00:00`)).getDay() === 2) {
+        error += " cannot be on a Tuesday";
+      } else return acc;
+      acc.push(error);
+    } else if (field === "reservation_time") {
+        let error = field;
+        const sameDay = (new Date).toISOString().split("T")[0] === reservation.reservation_date;
+        const date = new Date;
+        const currentTime = date.toLocaleTimeString([], {hr12: false, hour: "2-digit", minute:"2-digit"});
+        if (!reservation[field]?.match(/^(0[0-9]|1[0-9]|2[0-3]):([0-6][0-9])$/)) {
+          error += " must be formatted hh:mm";
+        } else if (sameDay && currentTime > reservation[field]) {
+          error += " cannot be a past time.";
+        } else return acc;
+        acc.push(error);
     } else if (field === "people" && !Number.isInteger(reservation[field])) {
       acc.push(field);
       acc.push(`type ${typeof field}`)
@@ -19,7 +38,7 @@ function validReservation(req, res, next) {
     return acc;
   }, [])
 
-  if (errorMessage.length) next({"status": 400, "message": "Incorrect fields: " + errorMessage.join(", ")})
+  if (errorMessage.length) next({"status": 400, "message": "Error: " + errorMessage.join(", ")})
   next()
 }
 
