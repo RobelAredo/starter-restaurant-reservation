@@ -13,9 +13,9 @@ function validReservation(req, res, next) {
       if (!reservation[field]?.match(/^\d{4}-(0[1-9]|1[0-2])-([0][1-9]|[12][0-9]|[3][01])$/)) {
         error += " must be formatted yyyy-mm-dd"
       } else if (currentDate > reservationDate) {
-        error += " cannot be a past date";
+        error += " must be a future date";
       } else if ((new Date(`${reservationDate} 00:00`)).getDay() === 2) {
-        error += " cannot be on a Tuesday";
+        error += " cannot be on a Tuesday because we are closed";
       } else return acc;
       acc.push(error);
     } else if (field === "reservation_time") {
@@ -26,7 +26,7 @@ function validReservation(req, res, next) {
         if (!reservation[field]?.match(/^(0[0-9]|1[0-9]|2[0-3]):([0-6][0-9])$/)) {
           error += " must be formatted hh:mm";
         } else if (sameDay && currentTime > reservation[field]) {
-          error += " cannot be a past time.";
+          error += " must be a future time.";
         } else return acc;
         acc.push(error);
     } else if (field === "people" && !Number.isInteger(reservation[field])) {
