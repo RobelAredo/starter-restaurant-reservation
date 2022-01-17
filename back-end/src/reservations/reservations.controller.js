@@ -27,6 +27,10 @@ function validReservation(req, res, next) {
           error += " must be formatted hh:mm";
         } else if (sameDay && currentTime > reservation[field]) {
           error += " must be a future time.";
+        } else if (reservation[field] < "10:30") {
+          error += " must be after 10:30";
+        } else if (reservation[field] > "21:30") {
+          error += " must be before 9:30 pm becuse we close at 10:30 pm";
         } else return acc;
         acc.push(error);
     } else if (field === "people" && !Number.isInteger(reservation[field])) {

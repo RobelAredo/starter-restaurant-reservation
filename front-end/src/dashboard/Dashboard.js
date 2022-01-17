@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { listReservations } from "../utils/api";
+import { previous, next } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
 
 /**
@@ -12,9 +13,10 @@ import ErrorAlert from "../layout/ErrorAlert";
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  
+  const history = useHistory();
   const dateQuery = useLocation().search.split("=")
   date = dateQuery && dateQuery[0].match(/\?date/) ? dateQuery[1] : date;
-  console.log(useLocation().search, date)
   useEffect(loadDashboard, [date]);
 
   function loadDashboard() {
@@ -33,6 +35,11 @@ function Dashboard({ date }) {
         <h4 className="mb-0">Reservations for date</h4>
       </div>
       <ErrorAlert error={reservationsError} />
+      <div className="btn btn-group" type="group">
+        <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)} className="btn btn-primary">Previous</button>
+        <button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)} className="btn btn-primary">Next</button>
+        <button type="button" onClick={() => history.push(`/dashboard`)} className="btn btn-primary">Today</button>
+      </div>
       {JSON.stringify(reservations)}
     </main>
   );

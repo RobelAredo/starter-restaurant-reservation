@@ -59,9 +59,7 @@ async function fetchJson(url, options, onCancel) {
  */
 
 export async function listReservations(params, signal) {
-  console.log("HHHHHHHHHHHHH", API_BASE_URL)
   const url = new URL(`${API_BASE_URL}/reservations`);
-  console.log("WHOLE URL", url)
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
   );
@@ -76,6 +74,7 @@ export async function createReservation(form, signal) {
     method: "POST",
     headers,
     body: JSON.stringify({data: form}),
+    signal,
   }
   return fetchJson(url, options);
 }
