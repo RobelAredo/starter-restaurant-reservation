@@ -21,7 +21,7 @@ export default function ReservationForm () {
     const ac = new AbortController();
     const addReservation = async () => {
       try {
-        await createReservation(form, ac);
+        await createReservation(form, ac.signal);
         
         const {reservation_date} = form;
         setForm({...intialForm});

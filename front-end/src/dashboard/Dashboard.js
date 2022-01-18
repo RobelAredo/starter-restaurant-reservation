@@ -3,6 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { listReservations } from "../utils/api";
 import { previous, next } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
+import ReservationTable from "./ReservationsTable";
 
 /**
  * Defines the dashboard page.
@@ -40,7 +41,7 @@ function Dashboard({ date }) {
         <button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)} className="btn btn-primary">Next</button>
         <button type="button" onClick={() => history.push(`/dashboard`)} className="btn btn-primary">Today</button>
       </div>
-      {JSON.stringify(reservations)}
+      <ReservationTable reservations={reservations} date={date}/>
     </main>
   );
 }
