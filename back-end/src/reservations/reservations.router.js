@@ -3,9 +3,13 @@ const controller = require("./reservations.controller");
 const methodNotAllowed = require("../errors/methodNotAllowed");
 
 
+
 router.route("/new")
   .post(controller.create)
   .all(methodNotAllowed);
+
+router.route("/:reservation_id")
+  .get(controller.find)
 
 router.route("/")
   .get(controller.list)

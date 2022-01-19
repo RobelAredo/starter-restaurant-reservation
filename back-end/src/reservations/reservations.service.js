@@ -10,9 +10,17 @@ async function create (reservation) {
 async function list (reservation_date) {
   return knex("reservations")
     .where({reservation_date})
+    .orderBy("reservation_time")
+}
+
+async function find (reservation_id) {
+  return knex("reservations")
+    .where({reservation_id})
+    .first();
 }
 
 module.exports = {
   list,
   create,
+  find,
 }

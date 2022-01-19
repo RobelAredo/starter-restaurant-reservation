@@ -4,6 +4,12 @@ exports.up = function(knex) {
     table.increments("table_id").primary();
     table.string("table_name");
     table.integer("capacity");
+    table.integer("reservation_id").unsigned().unique();
+    table
+      .foreign("reservation_id")
+      .references("reservation_id")
+      .inTable("reservations")
+      .onDelete("cascade");
     table.timestamps(true, true);
   })
 };
