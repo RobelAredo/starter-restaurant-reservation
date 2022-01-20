@@ -29,7 +29,7 @@ headers.append("Content-Type", "application/json");
  *  a promise that resolves to the `json` data or an error.
  *  If the response is not in the 200 - 399 range the promise is rejected.
  */
-async function fetchJson(url, options, onCancel) {
+async function fetchJson (url, options, onCancel) {
   try {
     const response = await fetch(url, options);
 
@@ -58,7 +58,7 @@ async function fetchJson(url, options, onCancel) {
  *  a promise that resolves to a possibly empty array of reservation saved in the database.
  */
 
-export async function listReservations(params, signal) {
+export async function listReservations (params, signal) {
   const url = new URL(`${API_BASE_URL}/reservations`);
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
@@ -68,13 +68,13 @@ export async function listReservations(params, signal) {
     .then(formatReservationTime);
 }
 
-export async function listTables(signal) {
+export async function listTables (signal) {
   const url = new URL(`${API_BASE_URL}/tables`);
 
   return fetchJson(url, { headers, signal });
 }
 
-export async function createReservation(form, signal) {
+export async function createReservation (form, signal) {
   const url = new URL(`${API_BASE_URL}/reservations`);
   const options = {
     method: "POST",
@@ -85,7 +85,7 @@ export async function createReservation(form, signal) {
   return fetchJson(url, options);
 }
 
-export async function createTable(form, signal) {
+export async function createTable (form, signal) {
   const url = new URL(`${API_BASE_URL}/tables`);
   const options = {
     method: "POST",
@@ -96,12 +96,12 @@ export async function createTable(form, signal) {
   return fetchJson(url, options);
 }
 
-export async function listAvailable(signal) {
+export async function listAvailable (signal) {
   const url = new URL(`${API_BASE_URL}/tables/seat`);
   return fetchJson(url, {headers, signal});
 }
 
-export async function reserveTable(reservation_id, table_id, signal) {
+export async function reserveTable (reservation_id, table_id, signal) {
   const url = new URL(`${API_BASE_URL}/tables/${table_id}/seat`);
   const options = {
     method: "PUT",
@@ -109,5 +109,16 @@ export async function reserveTable(reservation_id, table_id, signal) {
     body: JSON.stringify({data: {reservation_id}}),
     signal,
   };
+  return fetchJson(url, options);
+}
+
+export async function finishTable (table_id, signal) {
+  const url = new URL(`${API_BASE_URL}/tables/${table_id}/seat`);
+  const options = {
+    method: "DELETE",
+    headers,
+    signal,
+  };
+  console.log("finishTable API HERE")
   return fetchJson(url, options);
 }

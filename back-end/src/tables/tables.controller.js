@@ -1,6 +1,6 @@
 const service = require("./tables.service");
 
-function validTable (req, res, next) {
+function validTableFields (req, res, next) {
   const table = req.body.data;
   if (!table) next({status: 400, message: "Data is missing"});
   const fields = ["table_name", "capacity"];
@@ -68,9 +68,25 @@ async function unSeat (req, res, next) {
   next();
 }
 
+async function destroy (req, res) {
+  const {table_id} = req.params;
+  const data = await service.destroy(table_id);
+  res.status("200").send({data});
+}
+
+async function validTable (req, res, next) {
+  const { table_id } = req.params;
+  const table = await service.validTable(table_id);
+
+  if (!table) return next({status: 404, message: `table ${table_id} does not exist`});
+  if (!table.reservation_id) return next({status: 400, message: `table ${table_id} is not occupied`});
+  return next();
+}
+
 module.exports = {
   list,
   listAvailable,
-  create: [validTable, create],
+  create: [validTableFields, create],
   update: [validSeating, unSeat, update],
+  destroy: [validTable, destroy]
 }

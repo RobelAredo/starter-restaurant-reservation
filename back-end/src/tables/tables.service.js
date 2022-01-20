@@ -48,6 +48,13 @@ async function update (table_id, reservation_id) {
     .returning("*");
 }
 
+async function destroy (table_id) {
+  return knex("tables")
+      .where({table_id})
+      .update({reservation_id: null})
+      .returning("*");
+}
+
 module.exports = {
   list,
   listAvailable,
@@ -56,4 +63,5 @@ module.exports = {
   validTable,
   validReservation,
   update,
+  destroy,
 }
