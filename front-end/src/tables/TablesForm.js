@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import ErrorAlert from "../layout/ErrorAlert";
 import { createTable } from "../utils/api";
 
 export default function TableForm () {
-  const initialForm = { table_name: "", capacity: 1}
+  const initialForm = { table_name: "", capacity: ""}
   const [form, setForm] = useState(initialForm);
-
+  const [error, setError] = useState(null);
   const history = useHistory();
 
   function changeHandler ({target}) {
-    setForm({...form, [target.name]: target.value})
+    setForm({...form, [target.name]: +target.value? +target.value : target.value})
   }
 
   function submitHandler (event) {
@@ -17,10 +18,16 @@ export default function TableForm () {
     const ac = new AbortController();
 
     const addTable = async () => {
-      setForm({...form, capacity: +form.capacity});
-      await createTable(form, ac.siganl);
-      setForm(initialForm);
-      history.push("/dashboard");
+      try {
+        // setForm((submission) => ({...submission, capacity: +submission.capacity}));
+        await createTable(form, ac.siganl);
+        
+        setForm(initialForm);
+        setError(null);
+        history.push("/dashboard");
+      } catch (error) {
+        setError(error);
+      }
     }
 
     addTable();
@@ -30,6 +37,7 @@ export default function TableForm () {
   return (
     <>
       <br/>
+      <ErrorAlert error={error} />
       <form onSubmit={submitHandler}>
         <label htmlFor="table_name">
           Table Name:

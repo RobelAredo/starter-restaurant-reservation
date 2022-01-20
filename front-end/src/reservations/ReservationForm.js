@@ -1,20 +1,17 @@
-import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
-import {createReservation} from "../utils/api";
-import Alert from "./Alert";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import ErrorAlert from "../layout/ErrorAlert";
+import { createReservation } from "../utils/api";
 
 export default function ReservationForm () {
   const intialForm = {first_name: "", last_name: "", mobile_number: "", reservation_date: "", reservation_time: "", people: 1};
   const [form, setForm] = useState(intialForm);
+  const [error, setError] = useState(null);
   const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState("");
 
   function changeHandler ({target}) {
     setForm(form => ({...form, [target.name] : +target.value? +target.value : target.value}));
-    console.log(form.reservation_date)
   }
-
-  
 
   function sumbitHandler (event) {
     event.preventDefault();
@@ -26,10 +23,9 @@ export default function ReservationForm () {
         const {reservation_date} = form;
         setForm({...intialForm});
         history.push(`/dashboard?date=${reservation_date}`);
-        setErrorMessage("");
+        setError(null);
       } catch (error) {
-        setErrorMessage(error.message);
-        console.log(errorMessage);
+        setError(error);
       }
     }
     addReservation();
@@ -39,7 +35,7 @@ export default function ReservationForm () {
   return (
     <>
       <br/>
-      <Alert errorMessage={errorMessage} />
+      <ErrorAlert error={error} />
       <form onSubmit={sumbitHandler} className="form">
         <label htmlFor="first_name">
           First name:
@@ -71,7 +67,7 @@ export default function ReservationForm () {
           <input name="people" type="number" id="people"
           onChange={changeHandler} value={form.people} />
         </label>
-        <button className="btn btn-primary" type="submit">
+        <button name="submit" className="btn btn-primary" type="submit">
           Submit
         </button>
         <button name="cancel" className="btn btn-danger" type="button"

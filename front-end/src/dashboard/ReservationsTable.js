@@ -1,9 +1,6 @@
 import React from "react";
-import { useHistory } from "react-router";
 
 export default function ReservationTable ({ reservations }) {
-
-  const history = useHistory();
 
   const reservationList = reservations.map(({first_name, last_name, reservation_time, people, reservation_id}) => (
     <tr key={reservation_id}>
@@ -11,10 +8,8 @@ export default function ReservationTable ({ reservations }) {
       <td>{first_name} {last_name}</td>
       <td>{people}</td>
       <td>
-        <button className="btn btn-info" name="seat"
-        onClick={() => history.push(`/reservations/${reservation_id}/seat`)}>
-          SEAT
-        </button></td>
+        <a className="btn btn-info" name="seat" href={`/reservations/${reservation_id}/seat`}>SEAT</a>
+      </td>
     </tr>
   ))
 
@@ -26,7 +21,6 @@ export default function ReservationTable ({ reservations }) {
           <th scope="col">Name</th>
           <th scope="col">Group Size</th>
           <th scope="col">Seating</th>
-          
         </tr>
       </thead>
       <tbody>
