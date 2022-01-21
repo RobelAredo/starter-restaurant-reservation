@@ -20,14 +20,11 @@ export default function SelectionOptions ({tableList}) {
 
   function submitHandler (event) {
     event.preventDefault();
-    const ac1 = new AbortController();
-    const ac2 = new AbortController();
+    const ac = new AbortController();
 
     const reserveSelection = async () => {
       try {
-        console.log(selection)
-        await reserveTable(reservation_id, selection, ac1.signal);
-        await changeStatus(reservation_id, "seated", ac2.signal);
+        await reserveTable(reservation_id, selection, ac.signal);
         history.push("/dashboard");
       } catch (error) {
         setSelectionError(error);
@@ -35,8 +32,7 @@ export default function SelectionOptions ({tableList}) {
     }
 
     reserveSelection();
-
-    return () => ac1.abort() && ac2.abort();
+    return () => ac.abort();
   }
 
   return (

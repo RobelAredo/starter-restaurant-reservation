@@ -36,10 +36,11 @@ function validReservationFields(req, res, next) {
     } else if (field === "people" && !Number.isInteger(reservation[field])) {
       acc.push(field);
       acc.push(`type ${typeof field}`)
-    } else if (field === "status" && reservation[field] != "booked") {
-      acc.push(`${field} ${reservation[field]} is invalid, reservation status must be 'booked'`)
-    } else if (!reservation[field]) {
-      acc.push(field);
+    } else if (field === "status" && reservation[field] && reservation[field] != "booked") {
+      console.log("ddddddddddddddddddd", !reservation[field])
+      acc.push(`${field} ${reservation[field]} is invalid - reservation status must be 'booked' or missing`)
+    } else if (!reservation[field] && field !== "status") {
+      acc.push(`${field} field is missing`);
     }
     return acc;
   }, [])
@@ -49,7 +50,9 @@ function validReservationFields(req, res, next) {
 }
 
 async function create(req, res) {
-  const data = await service.create(req.body.data);
+  const reservation = req.body.data;
+  reservation.status = "booked";
+  const data = await service.create(reservation);
   res.status("201").send({ data });
 }
 

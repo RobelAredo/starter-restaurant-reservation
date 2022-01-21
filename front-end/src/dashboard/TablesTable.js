@@ -8,19 +8,17 @@ export default function TablesTable ({tables}) {
 
   function clickHandler (table) {
     if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
-      const ac1 = new AbortController();
-      const ac2 = new AbortController();
+      const ac = new AbortController();
       const finishOccupiedTable = async () => {
         try {
-          await finishTable(table.table_id, ac1.signal);
-          await changeStatus(table.reservation_id, "finished", ac2.signal)
+          await finishTable(table.table_id, ac.signal);
           window.location.reload(false);
         } catch (error) {
           setError(error);
         }
       }
       finishOccupiedTable();
-      return () => ac1.abort() && ac2.abort();
+      return () => ac.abort();
     }
   }
 
