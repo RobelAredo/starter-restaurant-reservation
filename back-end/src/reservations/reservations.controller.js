@@ -58,12 +58,24 @@ async function create(req, res) {
 
 async function list (req, res) {
   const reservation_date = req.query.date ?? (new Date).toISOString().split("T")[0];
-  const data = await service.list(reservation_date);
+  const {mobile_number} = req.query;
+  let data;
+  if (mobile_number) data = await service.search(mobile_number);
+  else data = await service.list(reservation_date);
   res.json({data});
 }
 
-async function find (req, res) {
-  const data = await service.find(req.params.reservation_id);
+async function validReservationId (req, res, next) {
+  const {reservation_id} = req.params;
+  const reservation = await service.find(reservation_id);
+  if (!reservation) return next({status: 404, message: `reservation ${reservation_id} does not exist.`})
+
+  res.locals.data = data;
+  return next();
+}
+
+function find (req, res) {
+  const {data} = res.locals;
   res.status("200").send({data});
 }
 
@@ -89,6 +101,6 @@ async function update (req, res) {
 module.exports = {
   list,
   create : [validReservationFields, create],
-  find,
+  find : [validReservationId, find],
   update : [validReservation, update],
 };

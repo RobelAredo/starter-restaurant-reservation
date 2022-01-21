@@ -132,3 +132,10 @@ export async function changeStatus (reservation_id, status, signal) {
   };
   return fetchJson(url, options);
 }
+
+export async function search (mobileNumber, signal) {
+  const url = new URL(`${API_BASE_URL}/reservations?mobile_number=${mobileNumber}`);
+  return fetchJson(url, {headers, signal})
+    .then(formatReservationDate)
+    .then(formatReservationTime);
+}

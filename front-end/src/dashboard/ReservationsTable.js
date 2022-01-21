@@ -1,10 +1,10 @@
 import React from "react";
 import ReservationRowDisplay from "./ReservationRowDisplay";
 
-export default function ReservationTable ({ reservations }) {
+export default function ReservationsTable ({ reservations, all }) {
 
   const reservationList = reservations.map(reservation => (
-    <ReservationRowDisplay reservation={reservation} />
+    <ReservationRowDisplay reservation={reservation} all={all}/>
   ))
 
   return (

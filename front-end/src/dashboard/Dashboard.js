@@ -3,7 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { listReservations, listTables } from "../utils/api";
 import { previous, next } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
-import ReservationTable from "./ReservationsTable";
+import ReservationsTable from "./ReservationsTable";
 import TablesTable from "./TablesTable";
 
 /**
@@ -39,6 +39,8 @@ function Dashboard({ date }) {
     return () => ac1.abort() && ac2.abort();
   }
 
+  console.log(reservations)
+
   return (
     <main>
       <h1>Dashboard</h1>
@@ -53,7 +55,7 @@ function Dashboard({ date }) {
             <h4 className="mb-0">Reservations for {date}</h4>
           </div>
           <ErrorAlert error={reservationsError} />
-          <ReservationTable reservations={reservations} />
+          <ReservationsTable reservations={reservations} />
         </div>
         <div className="col col-6">
           <h4>Tables availble</h4>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ErrorAlert from "../layout/ErrorAlert";
-import { changeStatus, finishTable } from "../utils/api";
+import { finishTable } from "../utils/api";
 
 export default function TablesTable ({tables}) {
 
