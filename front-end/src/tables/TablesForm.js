@@ -10,7 +10,7 @@ export default function TableForm () {
   const history = useHistory();
 
   function changeHandler ({target}) {
-    setForm({...form, [target.name]: +target.value? +target.value : target.value})
+    setForm({...form, [target.name]: +target.value? +target.value : target.value});
   }
 
   function submitHandler (event) {
@@ -19,7 +19,6 @@ export default function TableForm () {
 
     const addTable = async () => {
       try {
-        // setForm((submission) => ({...submission, capacity: +submission.capacity}));
         await createTable(form, ac.siganl);
         
         setForm(initialForm);

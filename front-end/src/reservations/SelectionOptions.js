@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
 import ErrorAlert from "../layout/ErrorAlert";
-import { reserveTable } from "../utils/api";
+import { changeStatus, reserveTable } from "../utils/api";
 
 
 export default function SelectionOptions ({tableList}) {
@@ -20,12 +20,14 @@ export default function SelectionOptions ({tableList}) {
 
   function submitHandler (event) {
     event.preventDefault();
-    const ac = new AbortController();
+    const ac1 = new AbortController();
+    const ac2 = new AbortController();
 
     const reserveSelection = async () => {
       try {
         console.log(selection)
-        await reserveTable(reservation_id, selection, ac.signal);
+        await reserveTable(reservation_id, selection, ac1.signal);
+        await changeStatus(reservation_id, "seated", ac2.signal);
         history.push("/dashboard");
       } catch (error) {
         setSelectionError(error);
@@ -34,7 +36,7 @@ export default function SelectionOptions ({tableList}) {
 
     reserveSelection();
 
-    return () => ac.abort();
+    return () => ac1.abort() && ac2.abort();
   }
 
   return (

@@ -1,9 +1,9 @@
 const service = require("./reservations.service");
 
-function validReservation(req, res, next) {
+function validReservationFields(req, res, next) {
   const reservation = req.body.data;
   if (!reservation) next({"status": 400, "message": "No data was sent."})
-  const fields = ["first_name", "last_name", "mobile_number", "reservation_date", "reservation_time", "people"];
+  const fields = ["first_name", "last_name", "mobile_number", "reservation_date", "reservation_time", "people", "status"];
   
   errorMessage = fields.reduce((acc, field) => {
     if (field === "reservation_date") {
@@ -36,6 +36,8 @@ function validReservation(req, res, next) {
     } else if (field === "people" && !Number.isInteger(reservation[field])) {
       acc.push(field);
       acc.push(`type ${typeof field}`)
+    } else if (field === "status" && reservation[field] != "booked") {
+      acc.push(`${field} ${reservation[field]} is invalid, reservation status must be 'booked'`)
     } else if (!reservation[field]) {
       acc.push(field);
     }
@@ -59,12 +61,31 @@ async function list (req, res) {
 
 async function find (req, res) {
   const data = await service.find(req.params.reservation_id);
-  console.log(req.params.reservation_id)
+  res.status("200").send({data});
+}
+
+async function validReservation (req, res, next) {
+  const {reservation_id} = req.params;
+  const {status} = req.body.data;
+  const reservation = await service.find(reservation_id);
+
+  if (!reservation) return next({status: 404, message: `reservation ${reservation_id} does not exist.`})
+  if (!status.match(/^booked$|^seated$|^finished$/)) return next({status: 400, message: `${status} is an invalid status to update.`})
+  if (reservation.status === "finished") return next({status: 400, message: "cannot update a finished reservation."})
+  return next();
+}
+
+async function update (req, res) {
+  const {reservation_id} = req.params;
+  const {status} = req.body.data;
+  
+  const data = await service.update(reservation_id, status);
   res.status("200").send({data});
 }
 
 module.exports = {
   list,
-  create : [validReservation, create],
+  create : [validReservationFields, create],
   find,
+  update : [validReservation, update],
 };

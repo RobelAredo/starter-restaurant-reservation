@@ -55,22 +55,22 @@ async function validSeating (req, res, next) {
 }
 
 async function update (req, res) {
-  console.log("BE tables.controlloer update")
   const {table_id} = req.params;
   const {reservation_id} = req.body.data;
   const data = await service.update(table_id, reservation_id);
   res.status("200").send({data});
 }
 
-async function unSeat (req, res, next) {
+async function notSeated (req, res, next) {
   const {reservation_id} = req.body.data;
-  service.unSeat(reservation_id)
+  const reservation = await service.find(reservation_id)
+  if (reservation.status !== "booked") return next({status: "400", message: `reservation ${reservation_id} is already seated.`})
   next();
 }
 
 async function destroy (req, res) {
   const {table_id} = req.params;
-  const data = await service.destroy(table_id);
+  const data = await service.destroy(table_id, res.locals.reservation_id);
   res.status("200").send({data});
 }
 
@@ -80,6 +80,8 @@ async function validTable (req, res, next) {
 
   if (!table) return next({status: 404, message: `table ${table_id} does not exist`});
   if (!table.reservation_id) return next({status: 400, message: `table ${table_id} is not occupied`});
+
+  res.locals.reservation_id = table.reservation_id;
   return next();
 }
 
@@ -87,6 +89,6 @@ module.exports = {
   list,
   listAvailable,
   create: [validTableFields, create],
-  update: [validSeating, unSeat, update],
+  update: [validSeating, notSeated, update],
   destroy: [validTable, destroy]
 }

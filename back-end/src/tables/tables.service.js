@@ -20,11 +20,10 @@ async function listAvailable () {
     .orderBy("table_name");
 }
 
-async function unSeat (reservation_id) {
-  return knex("tables")
+async function find (reservation_id) {
+  return knex("reservations")
       .where({reservation_id})
-      .update({reservation_id: null})
-      .returning("*");
+      .first()
 }
 
 async function validTable (table_id) {
@@ -41,25 +40,33 @@ async function validReservation (reservation_id) {
     .first();
 }
 
-async function update (table_id, reservation_id) {
+async function update (table_id, reservation_id, status) {
+  await knex("reservations")
+    .where({reservation_id})
+    .update({status : "seated"})
+
   return knex("tables")
     .where({table_id})
     .update({reservation_id})
     .returning("*");
 }
 
-async function destroy (table_id) {
+async function destroy (table_id, reservation_id) {
+  await knex("reservations")
+    .where({reservation_id})
+    .update({status: "finished"})
+
   return knex("tables")
-      .where({table_id})
-      .update({reservation_id: null})
-      .returning("*");
+    .where({table_id})
+    .update({reservation_id: null})
+    .returning("*");
 }
 
 module.exports = {
   list,
   listAvailable,
   create,
-  unSeat,
+  find,
   validTable,
   validReservation,
   update,

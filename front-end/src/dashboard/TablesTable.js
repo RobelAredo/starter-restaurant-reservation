@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import ErrorAlert from "../layout/ErrorAlert";
-import { finishTable } from "../utils/api";
+import { changeStatus, finishTable } from "../utils/api";
 
 export default function TablesTable ({tables}) {
 
   const [error, setError] = useState(null)
 
-  function clickHandler (table_id) {
+  function clickHandler (table) {
     if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
-      const ac = new AbortController();
+      const ac1 = new AbortController();
+      const ac2 = new AbortController();
       const finishOccupiedTable = async () => {
         try {
-          await finishTable(table_id, ac.signal);
+          await finishTable(table.table_id, ac1.signal);
+          await changeStatus(table.reservation_id, "finished", ac2.signal)
           window.location.reload(false);
         } catch (error) {
           setError(error);
         }
       }
       finishOccupiedTable();
-      return () => ac.abort();
+      return () => ac1.abort() && ac2.abort();
     }
   }
 
@@ -32,7 +34,7 @@ export default function TablesTable ({tables}) {
       <td>
         {
           table.reservation_id 
-            ? <button className="btn btn-warning" onClick={() => clickHandler(table.table_id)}
+            ? <button className="btn btn-warning" onClick={() => clickHandler(table)}
               data-table-id-finish={table.table_id}>
                 FINISH
               </button> 

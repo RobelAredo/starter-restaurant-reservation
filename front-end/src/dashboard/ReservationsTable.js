@@ -1,16 +1,10 @@
 import React from "react";
+import ReservationRowDisplay from "./ReservationRowDisplay";
 
 export default function ReservationTable ({ reservations }) {
 
-  const reservationList = reservations.map(({first_name, last_name, reservation_time, people, reservation_id}) => (
-    <tr key={reservation_id}>
-      <td>{reservation_time}</td>
-      <td>{first_name} {last_name}</td>
-      <td>{people}</td>
-      <td>
-        <a className="btn btn-info" name="seat" href={`/reservations/${reservation_id}/seat`}>SEAT</a>
-      </td>
-    </tr>
+  const reservationList = reservations.map(reservation => (
+    <ReservationRowDisplay reservation={reservation} />
   ))
 
   return (
@@ -20,6 +14,7 @@ export default function ReservationTable ({ reservations }) {
           <th scope="col">Time</th>
           <th scope="col">Name</th>
           <th scope="col">Group Size</th>
+          <th scope="col">Status</th>
           <th scope="col">Seating</th>
         </tr>
       </thead>
