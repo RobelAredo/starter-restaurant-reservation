@@ -17,7 +17,6 @@ export default function EditReservation () {
   function loadReservation () {
     const ac = new AbortController();
     
-    console.log("HEHEHEHEHEHE EDIT RESERVATION")
     const find = async () => {
       try {
         const reservation = await findReservation(reservation_id, ac.signal);
@@ -40,8 +39,8 @@ export default function EditReservation () {
     const addReservation = async () => {
     setError(null);
       try {
-        await editReservation(form, ac.signal);        
-        history.goBack();
+        await editReservation(form, ac.signal); 
+        history.push(`/dashboard?date=${form.reservation_date}`);
       } catch (error) {
         setError(error);
       }
@@ -50,7 +49,6 @@ export default function EditReservation () {
     return () => ac.abort();
   }
 
-  console.log(form)
   return (
     <>
       <br/>

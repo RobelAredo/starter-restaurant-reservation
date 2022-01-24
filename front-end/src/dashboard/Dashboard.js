@@ -40,8 +40,6 @@ function Dashboard({ date }) {
     return () => ac1.abort() && ac2.abort();
   }
 
-  console.log(reservations)
-
   return (
     <main>
       <h1>Dashboard</h1>
