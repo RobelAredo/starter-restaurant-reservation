@@ -38,7 +38,6 @@ async function listAvailable (req, res) {
 
 async function validSeating (req, res, next) {
   const x = req.body.data;
-  console.log(x)
   if (!req.body.data) return next ({status: 400, message: "Data is missing"})
   
   const {table_id} = req.params;

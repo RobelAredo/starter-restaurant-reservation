@@ -37,7 +37,6 @@ function validReservationFields(req, res, next) {
       acc.push(field);
       acc.push(`type ${typeof field}`)
     } else if (field === "status" && reservation[field] && reservation[field] != "booked") {
-      console.log("ddddddddddddddddddd", !reservation[field])
       acc.push(`${field} ${reservation[field]} is invalid - reservation status must be 'booked' or missing`)
     } else if (!reservation[field] && field !== "status") {
       acc.push(`${field} field is missing`);
