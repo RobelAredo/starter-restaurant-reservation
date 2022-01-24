@@ -35,10 +35,25 @@ async function update (reservation_id, status) {
     .then(reservations => reservations[0]);
 }
 
+async function edit ({reservation_id, first_name, last_name, mobile_number, reservation_date, reservation_time, people}) {
+  return knex("reservations")
+    .where({reservation_id})
+    .update({
+      first_name,
+      last_name,
+      mobile_number, 
+      reservation_date, 
+      reservation_time, 
+      people})
+    .returning("*")
+    .then(reservations => reservations[0]);
+}
+
 module.exports = {
   list,
   create,
   find,
   update,
-  search
+  search,
+  edit,
 }

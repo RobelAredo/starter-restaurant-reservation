@@ -27,6 +27,7 @@ function Dashboard({ date }) {
     const ac1 = new AbortController();
     const ac2 = new AbortController();
     setReservationsError(null);
+    setTablesError(null);
 
     listReservations({ date }, ac1.signal)
       .then(setReservations)
@@ -55,7 +56,7 @@ function Dashboard({ date }) {
             <h4 className="mb-0">Reservations for {date}</h4>
           </div>
           <ErrorAlert error={reservationsError} />
-          <ReservationsTable reservations={reservations} />
+          <ReservationsTable reservations={reservations} setReservationsError={setReservationsError}/>
         </div>
         <div className="col col-6">
           <h4>Tables availble</h4>

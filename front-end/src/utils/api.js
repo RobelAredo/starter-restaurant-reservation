@@ -127,7 +127,7 @@ export async function changeStatus (reservation_id, status, signal) {
   const options = {
     method: "PUT",
     headers,
-    body: JSON.stringfy({data: {status}}),
+    body: JSON.stringify({data: {status}}),
     signal,
   };
   return fetchJson(url, options);
@@ -138,4 +138,20 @@ export async function search (mobileNumber, signal) {
   return fetchJson(url, {headers, signal})
     .then(formatReservationDate)
     .then(formatReservationTime);
+}
+
+export async function findReservation (reservation_id, signal) {
+  const url = new URL(`${API_BASE_URL}/reservations/${reservation_id}`);
+  return fetchJson(url, {headers, signal});
+}
+
+export async function editReservation (form, signal) {
+  const url = new URL(`${API_BASE_URL}/reservations/${form.reservation_id}`);
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({data: {...form}}),
+    signal,
+  };
+  return fetchJson(url, options);
 }

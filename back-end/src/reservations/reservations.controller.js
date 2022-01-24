@@ -70,7 +70,7 @@ async function validReservationId (req, res, next) {
   const reservation = await service.find(reservation_id);
   if (!reservation) return next({status: 404, message: `reservation ${reservation_id} does not exist.`})
 
-  res.locals.data = data;
+  res.locals.data = reservation;
   return next();
 }
 
@@ -85,7 +85,7 @@ async function validReservation (req, res, next) {
   const reservation = await service.find(reservation_id);
 
   if (!reservation) return next({status: 404, message: `reservation ${reservation_id} does not exist.`})
-  if (!status.match(/^booked$|^seated$|^finished$/)) return next({status: 400, message: `${status} is an invalid status to update.`})
+  if (!status.match(/^booked$|^seated$|^finished$|^cancelled$/)) return next({status: 400, message: `${status} is an invalid status to update.`})
   if (reservation.status === "finished") return next({status: 400, message: "cannot update a finished reservation."})
   return next();
 }
@@ -98,9 +98,17 @@ async function update (req, res) {
   res.status("200").send({data});
 }
 
+async function edit (req, res) {
+  const reservation = req.body.data;
+
+  const data = await service.edit(reservation);
+  res.status("200").send({data});
+}
+
 module.exports = {
   list,
   create : [validReservationFields, create],
   find : [validReservationId, find],
   update : [validReservation, update],
+  edit: [validReservationId, validReservationFields, edit],
 };

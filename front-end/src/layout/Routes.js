@@ -4,10 +4,11 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
-import ReservationForm from "../reservations/ReservationForm";
+import CreateReservation from "../reservations/CreateReservation";
 import TablesForm from "../tables/TablesForm";
 import TableSelection from "../reservations/TableSelection";
 import SearchPage from "../search/SearchPage";
+import EditReservation from "../reservations/EditReservation";
 
 /**
  * Defines all the routes for the application.
@@ -29,10 +30,13 @@ function Routes() {
         <Dashboard date={today()} />
       </Route>
       <Route exact path="/reservations/new">
-        <ReservationForm />
+        <CreateReservation />
       </Route>
       <Route exact path="/reservations/:reservation_id/seat">
         <TableSelection />
+      </Route>
+      <Route exact path="/reservations/:reservation_id/edit">
+        <EditReservation />
       </Route>
       <Route exact path="/tables/new">
         <TablesForm />

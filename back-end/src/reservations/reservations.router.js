@@ -14,8 +14,10 @@ router.route("/:reservation_id/status")
 
 router.route("/:reservation_id")
   .get(controller.find)
-
-router.route("/")
+  .put(controller.edit)
+  .all(methodNotAllowed)
+  
+  router.route("/")
   .get(controller.list)
   .post(controller.create)
   .all(methodNotAllowed);

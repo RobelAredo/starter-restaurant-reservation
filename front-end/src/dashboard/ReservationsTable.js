@@ -1,10 +1,10 @@
 import React from "react";
 import ReservationRowDisplay from "./ReservationRowDisplay";
 
-export default function ReservationsTable ({ reservations, all }) {
+export default function ReservationsTable ({ reservations, all, setReservationsError}) {
 
   const reservationList = reservations.map(reservation => (
-    <ReservationRowDisplay reservation={reservation} all={all}/>
+    <ReservationRowDisplay reservation={reservation} all={all} setReservationsError={setReservationsError} />
   ))
 
   return (
@@ -16,6 +16,8 @@ export default function ReservationsTable ({ reservations, all }) {
           <th scope="col">Group Size</th>
           <th scope="col">Status</th>
           <th scope="col">Seating</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Cancel</th>
         </tr>
       </thead>
       <tbody>
