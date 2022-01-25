@@ -43,21 +43,23 @@ function Dashboard({ date }) {
   return (
     <main>
       <h1>Dashboard</h1>
+      <div className="btn btn-group pl-0" type="group">
+        <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)} className="btn btn-primary">Previous</button>
+        <button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)} className="btn btn-primary">Next</button>
+        <button type="button" onClick={() => history.push(`/dashboard`)} className="btn btn-primary">Today</button>
+      </div>
       <div className="row">
-        <div className="col col-6">
-        <div className="btn btn-group pl-0" type="group">
-          <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)} className="btn btn-primary">Previous</button>
-          <button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)} className="btn btn-primary">Next</button>
-          <button type="button" onClick={() => history.push(`/dashboard`)} className="btn btn-primary">Today</button>
-        </div>
+        <div className="col">
           <div className="d-md-flex mb-3">
             <h4 className="mb-0">Reservations for {date}</h4>
           </div>
           <ErrorAlert error={reservationsError} />
           <ReservationsTable reservations={reservations} setReservationsError={setReservationsError}/>
         </div>
-        <div className="col col-6">
-          <h4>Tables availble</h4>
+        <div className="col">
+          <div className="d-md-flex mb-3">
+            <h4 className="mb-0">Tables availble</h4>
+          </div>
           <ErrorAlert error={tablesError} />
           <TablesTable tables={tables} />
         </div>

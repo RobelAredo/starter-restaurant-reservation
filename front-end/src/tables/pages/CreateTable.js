@@ -18,12 +18,12 @@ export default function CreateTable () {
     event.preventDefault();
     const ac = new AbortController();
 
+    setError(null);
     const addTable = async () => {
       try {
         await createTable(form, ac.siganl);
         
         setForm(initialForm);
-        setError(null);
         history.push("/dashboard");
       } catch (error) {
         setError(error);

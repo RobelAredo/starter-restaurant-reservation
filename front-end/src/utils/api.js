@@ -150,7 +150,7 @@ export async function editReservation (form, signal) {
   const options = {
     method: "PUT",
     headers,
-    body: JSON.stringify({data: {...form}}),
+    body: JSON.stringify({data: form}),
     signal,
   };
   return fetchJson(url, options);

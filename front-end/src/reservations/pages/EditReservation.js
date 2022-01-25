@@ -8,13 +8,14 @@ import formatReservationDate from "../../utils/format-reservation-date";
 import formatReservationTime from "../../utils/format-reservation-time";
 
 export default function EditReservation () {
-  const [form, setForm] = useState({});
+  const intialForm = {first_name: "", last_name: "", mobile_number: "", reservation_date: "", reservation_time: "", people: 1};
+  const [form, setForm] = useState(intialForm);
   const [error, setError] = useState(null);
   const history = useHistory();
 
   const {reservation_id} = useParams();
 
-  useEffect(loadReservation, []);
+  useEffect(loadReservation, [reservation_id]);
 
   function loadReservation () {
     const ac = new AbortController();

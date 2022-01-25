@@ -26,7 +26,7 @@ export default function ReservationRowDisplay ({reservation, all, setReservation
     : (
       <>
         <td >{reservation.reservation_time}</td>
-        <td >{reservation.first_name} {reservation.last_name}</td>
+        <td >{reservation.first_name}&nbsp;{reservation.last_name}</td>
         <td >{reservation.people}</td>
         <td data-reservation-id-status={`${reservation.reservation_id}`}>
           {reservation.status}
@@ -47,7 +47,7 @@ export default function ReservationRowDisplay ({reservation, all, setReservation
         </td>
         <td >
           {
-            reservation.status !== "cancelled"
+            reservation.status === "booked"
             ? <button className="btn btn-danger" name="cancel" data-reservation-id-cancel={reservation.reservation_id}
               onClick={() => cancelHandler(reservation.reservation_id)}>
                 CANCEL
