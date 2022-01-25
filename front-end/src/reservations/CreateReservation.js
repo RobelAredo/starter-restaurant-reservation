@@ -17,14 +17,13 @@ export default function CreateReservation () {
   function sumbitHandler (event) {
     event.preventDefault();
     const ac = new AbortController();
+    setError(null);
     const addReservation = async () => {
       try {
         await createReservation(form, ac.signal);
         
-        const {reservation_date} = form;
+        history.push(`/dashboard?date=${form.reservation_date}`);
         setForm({...intialForm});
-        history.push(`/dashboard?date=${reservation_date}`);
-        setError(null);
       } catch (error) {
         setError(error);
       }

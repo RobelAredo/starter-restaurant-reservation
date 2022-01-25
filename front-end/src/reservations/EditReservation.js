@@ -36,8 +36,8 @@ export default function EditReservation () {
   function sumbitHandler (event) {
     event.preventDefault();
     const ac = new AbortController();
-    const addReservation = async () => {
     setError(null);
+    const addReservation = async () => {
       try {
         await editReservation(form, ac.signal); 
         history.push(`/dashboard?date=${form.reservation_date}`);
