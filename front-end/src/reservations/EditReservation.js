@@ -4,6 +4,8 @@ import ErrorAlert from "../layout/ErrorAlert";
 import { useParams } from "react-router";
 import { editReservation, findReservation } from "../utils/api";
 import { ReservationForm } from "./ReservationForm";
+import formatReservationDate from "../utils/format-reservation-date";
+import formatReservationTime from "../utils/format-reservation-time";
 
 export default function EditReservation () {
   const [form, setForm] = useState({});
@@ -20,7 +22,7 @@ export default function EditReservation () {
     const find = async () => {
       try {
         const reservation = await findReservation(reservation_id, ac.signal);
-        setForm({...reservation});
+        setForm(formatReservationTime(formatReservationDate(reservation)));
       } catch (error) {
         setError(error);
       }

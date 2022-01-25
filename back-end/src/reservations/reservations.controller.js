@@ -99,7 +99,7 @@ async function update (req, res) {
 
 async function edit (req, res) {
   const reservation = req.body.data;
-
+  
   const data = await service.edit(reservation);
   res.status("200").send({data});
 }
