@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import ErrorAlert from "../layout/ErrorAlert";
+import ErrorAlert from "../../layout/ErrorAlert";
 import { useParams } from "react-router";
-import { editReservation, findReservation } from "../utils/api";
-import { ReservationForm } from "./ReservationForm";
-import formatReservationDate from "../utils/format-reservation-date";
-import formatReservationTime from "../utils/format-reservation-time";
+import { editReservation, findReservation } from "../../utils/api";
+import { ReservationForm } from "../ReservationForm";
+import formatReservationDate from "../../utils/format-reservation-date";
+import formatReservationTime from "../../utils/format-reservation-time";
 
 export default function EditReservation () {
   const [form, setForm] = useState({});

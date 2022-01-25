@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ErrorAlert from "../layout/ErrorAlert";
-import { listAvailable } from "../utils/api";
-import SelectionOptions from "./SelectionOptions";
+import ErrorAlert from "../../layout/ErrorAlert";
+import { listAvailable } from "../../utils/api";
+import SelectionOptions from "../SelectionOptions";
 
 export default function TableSelection () {
 

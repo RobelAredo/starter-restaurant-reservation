@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ReservationsTable from "../dashboard/ReservationsTable";
-import ErrorAlert from "../layout/ErrorAlert";
-import { search } from "../utils/api";
+import ReservationsTable from "../ReservationsTable";
+import ErrorAlert from "../../layout/ErrorAlert";
+import { search } from "../../utils/api";
 
 export default function SearchPage () {
   const [mobile_number, setMobileNumber] = useState("");
@@ -25,8 +25,6 @@ export default function SearchPage () {
     findCustomers();
     return () => ac.abort();
   }
-
-  console.log(mobile_number, "OMEGALOL", searchResult);
 
   return (
     <>

@@ -4,7 +4,9 @@ import ReservationRowDisplay from "./ReservationRowDisplay";
 export default function ReservationsTable ({ reservations, all, setReservationsError}) {
 
   const reservationList = reservations.map(reservation => (
-    <ReservationRowDisplay reservation={reservation} all={all} setReservationsError={setReservationsError} />
+    <tr key={reservation.reservation_id}>
+      <ReservationRowDisplay reservation={reservation} all={all} setReservationsError={setReservationsError} />
+    </tr>
   ))
 
   return (
