@@ -35,20 +35,22 @@ export default function CreateReservation () {
 
   return (
     <>
-      <nav className="side-bar py-3">
+      <nav className="side-bar secondary py-3 px-0 mx-0">
         <h1 className="text-warning">Create Reservation</h1>
       </nav>
       <ErrorAlert error={error} />
-      <div className="card p-0 m-5" style={{width:"70%"}}>
-        <div className="row p-0 m-0">
-          <div className="bg-light p-3 pr-5">
-            <ReservationForm sumbitHandler={sumbitHandler} changeHandler={changeHandler} form={form} history={history} />
-          </div>
-          <div className="col p-0 m-0">
-            <img className="card-img pop" src={img} alt="Card cap"/>
+      <div className="card-bg">
+        <div className="card bg-light" style={{width:"70%"}}>
+          <div className="row p-0 m-0">
+            <div className="p-3 pr-5">
+              <ReservationForm sumbitHandler={sumbitHandler} changeHandler={changeHandler} form={form} history={history} />
+            </div>
+            <div className="col p-0 m-0">
+              <img className="card-img pop" src={img} alt="Card cap"/>
+            </div>
           </div>
         </div>
-    </div>
+      </div>
     </>
   )
 }

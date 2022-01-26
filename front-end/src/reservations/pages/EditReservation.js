@@ -6,6 +6,7 @@ import { editReservation, findReservation } from "../../utils/api";
 import { ReservationForm } from "../ReservationForm";
 import formatReservationDate from "../../utils/format-reservation-date";
 import formatReservationTime from "../../utils/format-reservation-time";
+const img = require("../../images/chef.jpg").default;
 
 export default function EditReservation () {
   const intialForm = {first_name: "", last_name: "", mobile_number: "", reservation_date: "", reservation_time: "", people: 1};
@@ -54,9 +55,22 @@ export default function EditReservation () {
 
   return (
     <>
-      <br/>
+      <nav className="side-bar secondary py-3 px-0 mx-0">
+        <h1 className="text-warning">Edit Reservation</h1>
+      </nav>
       <ErrorAlert error={error} />
-      <ReservationForm sumbitHandler={sumbitHandler} changeHandler={changeHandler} form={form} history={history} />
+      <div className="card-bg three">
+        <div className="card bg-light" style={{width:"70%"}}>
+          <div className="row p-0 m-0">
+            <div className="p-3 pr-5">
+              <ReservationForm sumbitHandler={sumbitHandler} changeHandler={changeHandler} form={form} history={history} />
+            </div>
+            <div className="col p-0 m-0">
+              <img className="card-img pop" src={img} alt="Card cap"/>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

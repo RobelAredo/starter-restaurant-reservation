@@ -10,11 +10,97 @@
   height: 100%;
 }
 
+.dashboard-container {
+  height: 100vh;
+}
+
+.navbar .container-fluid {
+
+}
+
+/* .search {
+  width: 50vw;
+} */
+
 .card-img {
   height: 100%;
   object-fit: cover;
 }
 
 .card {
-  margin:auto;
+  margin: auto;
+  border: none;
+}
+
+.card-bg {
+  padding: 8%;
+  background-image: url(../images/pexels-huỳnh-đạt-blur.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.card-bg.two {
+  background-image: url(../images/pexels-tirachard-kumtanom-blur.jpg);
+}
+
+.card-bg.three {
+  background-image: url(../images/coffee-shop-blur.jpg);
+}
+
+
+
+
+.card-img.table {
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
+.sidebar.secondary {
+  width: 100%;
+}
+
+form table {
+  align-items: flex-end;
+}
+
+form label {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+form input {
+  width: 100%;
+}
+
+form button {
+  width: 46%;
+}
+
+form.table button {
+  width: 70px;
+}
+
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.inputs input {
+  width: "100px"
+}
+
+@media all and (min-width: 480px) {
+  form.table {
+    display: flex;
+    justify-content: center;
+  }
 }

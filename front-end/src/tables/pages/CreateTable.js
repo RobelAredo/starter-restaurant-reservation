@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import ErrorAlert from "../../layout/ErrorAlert";
 import { createTable } from "../../utils/api";
 import { TableForm } from "../TableForm";
+const img = require("../../images/the-periodic-table.jpg").default;
+
 
 export default function CreateTable () {
   const initialForm = { table_name: "", capacity: ""}
@@ -36,9 +38,20 @@ export default function CreateTable () {
   
   return (
     <>
-      <br/>
-      <ErrorAlert error={error} />
-      <TableForm submitHandler={submitHandler} changeHandler={changeHandler} form={form} history={history} />
-    </>
+    <nav className="side-bar secondary py-3 px-0 mx-0">
+      <h1 className="text-warning">Create Table</h1>
+    </nav>
+    <ErrorAlert error={error} />
+    <div className="card-bg two">
+      <div className="card bg-light" style={{width:"90%"}}>
+        <div className="">
+          <div className="p-3">
+          <TableForm submitHandler={submitHandler} changeHandler={changeHandler} form={form} history={history} />
+          </div>
+          <img className="card-img table"  src={img} alt="Card cap"/>
+        </div>
+      </div>
+    </div>
+  </>
   )
 }
