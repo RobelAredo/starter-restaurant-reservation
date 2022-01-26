@@ -2,3 +2,19 @@
   background-color: #393a44;
   min-width: 200px;
 }
+
+.jumbotron {
+  background-image: url(../images/mediterranean-cuisine.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+
+.card-img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.card {
+  margin:auto;
+}

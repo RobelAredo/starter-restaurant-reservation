@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import ErrorAlert from "../../layout/ErrorAlert";
 import { createReservation } from "../../utils/api";
 import { ReservationForm } from "../ReservationForm";
+const img = require("../../images/pexels-andrea-piacquadio.jpg").default;
 
 export default function CreateReservation () {
   const intialForm = {first_name: "", last_name: "", mobile_number: "", reservation_date: "", reservation_time: "", people: 1};
@@ -34,9 +35,20 @@ export default function CreateReservation () {
 
   return (
     <>
-      <br/>
+      <nav className="side-bar py-3">
+        <h1 className="text-warning">Create Reservation</h1>
+      </nav>
       <ErrorAlert error={error} />
-      <ReservationForm sumbitHandler={sumbitHandler} changeHandler={changeHandler} form={form} history={history} />
+      <div className="card p-0 m-5" style={{width:"70%"}}>
+        <div className="row p-0 m-0">
+          <div className="bg-light p-3 pr-5">
+            <ReservationForm sumbitHandler={sumbitHandler} changeHandler={changeHandler} form={form} history={history} />
+          </div>
+          <div className="col p-0 m-0">
+            <img className="card-img pop" src={img} alt="Card cap"/>
+          </div>
+        </div>
+    </div>
     </>
   )
 }

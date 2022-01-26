@@ -5,6 +5,8 @@ import { previous, next } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationsTable from "../reservations/ReservationsTable";
 import TablesTable from "../tables/TablesTable";
+const italian = require("../images/italian-cuisine.jpg").default;
+
 
 /**
  * Defines the dashboard page.
@@ -42,23 +44,29 @@ function Dashboard({ date }) {
 
   return (
     <main>
-      <h1>Dashboard</h1>
-      <div className="btn btn-group pl-0" type="group">
-        <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)} className="btn btn-primary">Previous</button>
-        <button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)} className="btn btn-primary">Next</button>
-        <button type="button" onClick={() => history.push(`/dashboard`)} className="btn btn-primary">Today</button>
+      <div className="jumbotron jumbotron-fluid mb-0">
+        <div className="container">
+          <h1 className="display-1 text-warning">Dashboard</h1>
+        <div className="col px-0">
+          <div className="btn btn-group pl-0" type="group">
+            <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)} className="btn btn-warning font-weight-bold">Previous</button>
+            <button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)} className="btn btn-warning font-weight-bold">Next</button>
+            <button type="button" onClick={() => history.push(`/dashboard`)} className="btn btn-warning font-weight-bold">Today</button>
+          </div>
+        </div>
+        </div>
       </div>
-      <div className="row">
-        <div className="col">
-          <div className="d-md-flex mb-3">
+      <div className="row bg-light ml-0">
+        <div className="col m-0 px-0">
+          <div className="d-md-flex py-3 pl-3 bg-warning">
             <h4 className="mb-0">Reservations for {date}</h4>
           </div>
           <ErrorAlert error={reservationsError} />
           <ReservationsTable reservations={reservations} setReservationsError={setReservationsError}/>
         </div>
-        <div className="col">
-          <div className="d-md-flex mb-3">
-            <h4 className="mb-0">Tables availble</h4>
+        <div className="col m-0 px-0">
+          <div className="d-md-flex py-3 pl-3 bg-warning">
+            <h4 className="mb-0">Tables Available</h4>
           </div>
           <ErrorAlert error={tablesError} />
           <TablesTable tables={tables} />
