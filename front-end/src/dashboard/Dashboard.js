@@ -55,7 +55,7 @@ function Dashboard({ date }) {
         </div>
         </div>
       </div>
-      <div className="dashboard-container row bg-light ml-0">
+      <div className="dashboard-container row bg-light mx-0">
         <div className="col m-0 px-0">
           <div className="d-md-flex py-3 pl-3 bg-warning">
             <h4 className="mb-0">Reservations for {date}</h4>

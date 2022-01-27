@@ -14,14 +14,6 @@
   height: 100vh;
 }
 
-.navbar .container-fluid {
-
-}
-
-/* .search {
-  width: 50vw;
-} */
-
 .card-img {
   height: 100%;
   object-fit: cover;
@@ -76,6 +68,15 @@ form input {
 
 form button {
   width: 46%;
+}
+
+form.selection {
+  display: flex;
+}
+
+form.selection button {
+  align-self: center;
+  width: 70px;
 }
 
 form.table button {

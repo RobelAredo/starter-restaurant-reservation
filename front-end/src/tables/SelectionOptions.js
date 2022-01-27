@@ -17,8 +17,6 @@ export default function SelectionOptions ({tableList}) {
     setSelection(tableList[0].table_id);
   }
 
-  console.log(selection)
-
   const options = tableList.map(table => (
     <option key={table.table_id} value={table.table_id}>
       {table.table_name} - {table.capacity}
@@ -45,15 +43,15 @@ export default function SelectionOptions ({tableList}) {
   return (
     <>
       <ErrorAlert error={selectionError}/>
-      <form onSubmit={submitHandler}>
-        <label htmlFor="table">
+      <form className="selection" onSubmit={submitHandler}>
+        <label className="mr-3" htmlFor="table">
           Select Your Table
           <br/>
           <select name="table_id" onChange={(event) => setSelection(+event.target.value)}>
             {options}
           </select>
         </label>
-        <button className="btn btn-primary" type="submit">
+        <button className="btn btn-warning" type="submit">
           Submit
         </button>
       </form>
