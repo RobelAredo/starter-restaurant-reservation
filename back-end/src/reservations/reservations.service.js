@@ -9,7 +9,7 @@ async function create (reservation) {
 
 async function search (mobile_number) {
   return knex("reservations")
-    .whereRaw(`translate(mobile_number, '() -', '') like ?`,`%${mobile_number.replace(/\D/g, '')}%`)
+    .whereRaw(`translate(mobile_number, '() -', '') like ?`,`%${mobile_number.replace(/\W/g, '')}%`)
     .orderBy("reservation_date")
     .orderBy("reservation_time")
 }
