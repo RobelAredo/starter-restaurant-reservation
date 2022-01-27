@@ -59,7 +59,7 @@ async function list (req, res) {
   const reservation_date = req.query.date ?? (new Date).toISOString().split("T")[0];
   const {mobile_number} = req.query;
   let data;
-  if (mobile_number) data = await service.search(mobile_number);
+  if (mobile_number.replace(/ /g, "")) data = await service.search(mobile_number);
   else data = await service.list(reservation_date);
   res.json({data});
 }
