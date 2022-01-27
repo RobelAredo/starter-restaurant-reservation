@@ -6,11 +6,18 @@ import { reserveTable } from "../utils/api";
 
 export default function SelectionOptions ({tableList}) {
 
-  const [selection, setSelection] = useState(1);
+  const [selection, setSelection] = useState(null);
   const [selectionError, setSelectionError] = useState(null);
 
   const history = useHistory();
   const { reservation_id } = useParams();
+
+
+  if (selection === null && tableList[0]) {
+    setSelection(tableList[0].table_id);
+  }
+
+  console.log(selection)
 
   const options = tableList.map(table => (
     <option key={table.table_id} value={table.table_id}>

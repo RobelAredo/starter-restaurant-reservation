@@ -5,7 +5,6 @@ import { previous, next } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationsTable from "../reservations/ReservationsTable";
 import TablesTable from "../tables/TablesTable";
-const italian = require("../images/italian-cuisine.jpg").default;
 
 
 /**
