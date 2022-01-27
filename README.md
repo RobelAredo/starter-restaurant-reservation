@@ -39,6 +39,11 @@
 ![Search Page](/./README-imgs/Search.png?raw=true "Search")
 > Searches are based on the customers phone number and will also match substring.
 
+### Error Alerts:
+
+![Error Alert](/./README-imgs/Error_Alert.png?raw=true "Error Alert")
+> If the user inputs invalid fields an error alert will pop up and inform them of the error. This happens on all relevant pages.
+
 ## Technology
 
 ### Built with:
