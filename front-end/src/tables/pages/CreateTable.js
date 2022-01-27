@@ -44,7 +44,7 @@ export default function CreateTable () {
     <ErrorAlert error={error} />
     <div className="card-bg two">
       <div className="card bg-light" style={{width:"90%"}}>
-        <div className="">
+        <div>
           <div className="p-3">
           <TableForm submitHandler={submitHandler} changeHandler={changeHandler} form={form} history={history} />
           </div>

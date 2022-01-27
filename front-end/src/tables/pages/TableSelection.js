@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ErrorAlert from "../../layout/ErrorAlert";
 import { listAvailable } from "../../utils/api";
 import SelectionOptions from "../SelectionOptions";
+const img = require("../../images/the-periodic-table.jpg").default;
 
 export default function TableSelection () {
 
@@ -21,9 +22,21 @@ export default function TableSelection () {
   }
 
   return (
-    <>
+    <div className="table-selection">
+      <nav className="side-bar secondary py-3 px-0 mx-0">
+        <h1 className="text-warning">Select Table</h1>
+      </nav>
       <ErrorAlert error={listError} />
-      <SelectionOptions tableList={tableList}/>
-    </>
+      <div className="card-bg four">
+        <div className="card bg-light" style={{width:"90%"}}>
+          <div>
+            <div className="p-3 d-flex justify-content-center">
+              <SelectionOptions tableList={tableList}/>
+            </div>
+            <img className="card-img table"  src={img} alt="Card cap"/>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
