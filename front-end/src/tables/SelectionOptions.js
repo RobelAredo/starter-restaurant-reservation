@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
-import ErrorAlert from "../layout/ErrorAlert";
 import { reserveTable } from "../utils/api";
 
 
