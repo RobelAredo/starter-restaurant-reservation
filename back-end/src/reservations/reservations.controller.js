@@ -57,10 +57,12 @@ async function create(req, res) {
 
 async function list (req, res) {
   const reservation_date = req.query.date ?? (new Date).toISOString().split("T")[0];
-  const mobile_number = req.query.mobile_number.replace(/ /g, "");
-  let data;
-  if (mobile_number) data = await service.search(mobile_number);
-  else data = await service.list(reservation_date);
+  let {mobile_number} = req.query;
+  let data = [];
+  if (mobile_number !== undefined) {
+    mobile_number = mobile_number.replace(/ /g, "")
+    if (mobile_number) data = await service.search(mobile_number);
+  } else data = await service.list(reservation_date);
   res.json({data});
 }
 
