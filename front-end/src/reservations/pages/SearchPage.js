@@ -60,7 +60,7 @@ export default function SearchPage () {
           <ErrorAlert error={error}/>
           {searchResult.length 
             ? <ReservationsTable reservations={searchResult} all={true} setReservationsError={setError}/>
-            : <h2>No reservations found</h2>
+            : <h2 className="m-4 text-warning">No reservations found</h2>
           }
         </div>
         <img alt="pancakes and coffee" style={picStyle} src={pancakes} className="col-6 px-0"/>

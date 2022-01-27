@@ -41,16 +41,16 @@ export default function CreateTable () {
     <nav className="side-bar secondary py-3 px-0 mx-0">
       <h1 className="text-warning">Create Table</h1>
     </nav>
-    <ErrorAlert error={error} />
     <div className="card-bg two">
-      <div className="card bg-light" style={{width:"90%"}}>
-        <div>
-          <div className="p-3">
-          <TableForm submitHandler={submitHandler} changeHandler={changeHandler} form={form} history={history} />
+      <ErrorAlert error={error} />
+        <div className="card bg-light" style={{width:"90%"}}>
+          <div>
+            <div className="p-3">
+            <TableForm submitHandler={submitHandler} changeHandler={changeHandler} form={form} history={history} />
+            </div>
+            <img className="card-img table"  src={img} alt="Card cap"/>
           </div>
-          <img className="card-img table"  src={img} alt="Card cap"/>
         </div>
-      </div>
     </div>
   </>
   )

@@ -26,15 +26,15 @@ export default function TableSelection () {
       <nav className="side-bar secondary py-3 px-0 mx-0">
         <h1 className="text-warning">Select Table</h1>
       </nav>
-      <ErrorAlert error={listError} />
       <div className="card-bg four">
-        <div className="card bg-light" style={{width:"90%"}}>
-          <div>
-            <div className="p-3 d-flex justify-content-center">
-              <SelectionOptions tableList={tableList}/>
+        <ErrorAlert error={listError} />
+          <div className="card bg-light" style={{width:"90%"}}>
+            <div>
+              <div className="p-3 d-flex justify-content-center">
+                <SelectionOptions tableList={tableList} setError={setListError}/>
+              </div>
+              <img className="card-img table"  src={img} alt="Card cap"/>
             </div>
-            <img className="card-img table"  src={img} alt="Card cap"/>
-          </div>
         </div>
       </div>
     </div>

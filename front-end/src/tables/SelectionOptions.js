@@ -4,10 +4,9 @@ import ErrorAlert from "../layout/ErrorAlert";
 import { reserveTable } from "../utils/api";
 
 
-export default function SelectionOptions ({tableList}) {
+export default function SelectionOptions ({tableList, setError}) {
 
   const [selection, setSelection] = useState(null);
-  const [selectionError, setSelectionError] = useState(null);
 
   const history = useHistory();
   const { reservation_id } = useParams();
@@ -32,7 +31,7 @@ export default function SelectionOptions ({tableList}) {
         await reserveTable(reservation_id, selection, ac.signal);
         history.push("/dashboard");
       } catch (error) {
-        setSelectionError(error);
+        setError(error);
       }
     }
 
@@ -41,20 +40,17 @@ export default function SelectionOptions ({tableList}) {
   }
 
   return (
-    <>
-      <ErrorAlert error={selectionError}/>
-      <form className="selection" onSubmit={submitHandler}>
-        <label className="mr-3" htmlFor="table">
-          Select Your Table
-          <br/>
-          <select name="table_id" onChange={(event) => setSelection(+event.target.value)}>
-            {options}
-          </select>
-        </label>
-        <button className="btn btn-warning" type="submit">
-          Submit
-        </button>
-      </form>
-    </>
+    <form className="selection" onSubmit={submitHandler}>
+      <label className="mr-3" htmlFor="table">
+        Select Your Table
+        <br/>
+        <select name="table_id" onChange={(event) => setSelection(+event.target.value)}>
+          {options}
+        </select>
+      </label>
+      <button className="btn btn-warning" type="submit">
+        Submit
+      </button>
+    </form>
   )
 }
