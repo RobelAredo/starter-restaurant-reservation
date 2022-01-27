@@ -1,4 +1,5 @@
 const service = require("./tables.service");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 function validTableFields (req, res, next) {
   const table = req.body.data;
@@ -85,9 +86,9 @@ async function validTable (req, res, next) {
 }
 
 module.exports = {
-  list,
-  listAvailable,
-  create: [validTableFields, create],
-  update: [validSeating, notSeated, update],
-  destroy: [validTable, destroy]
+  list: asyncErrorBoundary(list),
+  listAvailable: asyncErrorBoundary(listAvailable),
+  create: [validTableFields, asyncErrorBoundary(create)],
+  update: [validSeating, notSeated, asyncErrorBoundary(update)],
+  destroy: [validTable, asyncErrorBoundary(destroy)]
 }

@@ -1,4 +1,6 @@
 const service = require("./reservations.service");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+
 
 function validReservationFields(req, res, next) {
   const reservation = req.body.data;
@@ -107,9 +109,9 @@ async function edit (req, res) {
 }
 
 module.exports = {
-  list,
-  create : [validReservationFields, create],
-  find : [validReservationId, find],
-  update : [validReservation, update],
-  edit: [validReservationId, validReservationFields, edit],
+  list: asyncErrorBoundary(list),
+  create : [validReservationFields, asyncErrorBoundary(create)],
+  find : [validReservationId, asyncErrorBoundary(find)],
+  update : [validReservation, asyncErrorBoundary(update)],
+  edit: [validReservationId, validReservationFields, asyncErrorBoundary(edit)],
 };
