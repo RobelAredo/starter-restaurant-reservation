@@ -2,15 +2,11 @@ import React from "react";
 
 export function ReservationForm ({sumbitHandler, changeHandler, form, history}) {
   const style = {
-    width:"100%",
-  } 
-  
-  const btnStyle = {
-    width:"46%",
+    width: "200px",
   }
 
   return (
-    <form onSubmit={sumbitHandler} className="col form bg-light mr-0 pr-0">
+    <form onSubmit={sumbitHandler} className="reservation col bg-light mr-0 pr-0">
       <label className="mr-0 pr-0" htmlFor="first_name">
         First name
         <br />
@@ -54,13 +50,15 @@ export function ReservationForm ({sumbitHandler, changeHandler, form, history}) 
         onChange={changeHandler} value={form.people} />
       </label>
       <br/>
-      <button style={btnStyle} name="submit" className="btn btn-warning font-weight-bold mr-3 mt-3" type="submit">
-        Submit
-      </button>
-      <button style={btnStyle} name="cancel" className="btn btn-danger font-weight-bold mt-3" type="button"
-      onClick={() => history.goBack()}>
-        Cancel
-      </button>
+      <div className="buttons row m-0">
+        <button name="submit" className="btn btn-warning font-weight-bold mt-3" type="submit">
+          Submit
+        </button>
+        <button name="cancel" className="btn btn-danger font-weight-bold mt-3" type="button"
+        onClick={() => history.goBack()}>
+          Cancel
+        </button>
+      </div>
     </form>
   )
 }

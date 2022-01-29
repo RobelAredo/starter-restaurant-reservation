@@ -47,12 +47,12 @@ export default function SearchPage () {
   return (
     <>
       <nav className="row side-bar secondary py-3">
-        <form className="pl-0 col form-inline justify-content-center justify-content-md-start" onSubmit={submitHandler}>
+        <form className="search pl-0 col form-inline justify-content-center justify-content-md-start" onSubmit={submitHandler}>
             <label className=" mb-0 my-0" htmlFor="mobile_number"></label>
-            <input className="form-control col-4 search mr-3" name="mobile_number" id="mobile_number" type="text"
+            <input className="col-4 search mr-4" name="mobile_number" id="mobile_number" type="text"
             onChange={({target}) => setMobileNumber(target.value)} value={mobileNumber}
             placeholder="Enter a customer's phone number"/>
-          <button className="btn col-1 btn-outline-warning" name="submit" type="submit">Find</button>
+          <button className="btn btn-outline-warning" name="submit" type="submit">Find</button>
         </form>
       </nav>
       <div className="row d-flex flex-nowrap justify-content-between">

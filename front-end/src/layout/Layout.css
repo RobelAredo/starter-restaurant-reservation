@@ -72,7 +72,11 @@ form input {
 }
 
 form button {
-  width: 46%;
+  width: 70px;
+}
+
+form.reservation button {
+  width: 45%;
 }
 
 form.selection {
@@ -81,11 +85,6 @@ form.selection {
 
 form.selection button {
   align-self: center;
-  width: 70px;
-}
-
-form.table button {
-  width: 70px;
 }
 
 .inputs {
@@ -100,8 +99,49 @@ form.table button {
   align-items: flex-end;
 }
 
+form.reservation .buttons {
+  justify-content: space-between;
+}
+
 .inputs input {
   width: "100px"
+}
+
+input, input:active:target:hover,
+select, select:active:focus:hover {
+  border: none;
+  outline: none;
+  border-bottom: solid black thin;
+  margin-top: 8px;
+  background-color: transparent;
+  font-size: 2vh;
+}
+
+.search input, .search input:-webkit-autofill {
+  border-bottom: solid rgb(255, 213, 0) thin;
+  padding: 0;
+  color: rgb(255, 200, 0);
+  -webkit-text-fill-color: rgb(255, 200, 0);
+  font-size: 18px;
+}
+
+option {
+  background-color: rgb(237, 237, 237);
+  border: none;
+  outline: none;
+}
+
+input:hover,
+select:hover {
+  border-bottom: solid rgb(0, 0, 0, .5) thin;
+}
+
+.search input:hover {
+  border-bottom: solid rgb(255, 242, 0) thin;
+}
+
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 @media all and (min-width: 480px) {

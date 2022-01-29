@@ -15,14 +15,14 @@ export function TableForm ({submitHandler, changeHandler, form, history}) {
           onChange={changeHandler} value={form.capacity}/>
         </label>
       </div>
-        <div className="buttons mt-3">
-          <button name="submit" className="btn btn-warning font-weight-bold mx-3" type="submit">
-            Submit
-          </button>
-          <button name="button" className="btn btn-danger font-weight-bold" type="button"
-          onClick={() => history.goBack()}>
-            Cancel
-          </button>
+      <div className="buttons mt-3">
+        <button name="submit" className="btn btn-warning font-weight-bold mx-3" type="submit">
+          Submit
+        </button>
+        <button name="button" className="btn btn-danger font-weight-bold" type="button"
+        onClick={() => history.goBack()}>
+          Cancel
+        </button>
       </div>
     </form>
   )
