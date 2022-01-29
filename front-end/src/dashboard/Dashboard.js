@@ -46,13 +46,13 @@ function Dashboard({ date }) {
       <div className="jumbotron jumbotron-fluid mb-0">
         <div className="container">
           <h1 className="display-1 text-warning">Dashboard</h1>
-        <div className="col px-0">
-          <div className="btn btn-group pl-0" type="group">
-            <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)} className="btn btn-warning font-weight-bold">Previous</button>
-            <button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)} className="btn btn-warning font-weight-bold">Next</button>
-            <button type="button" onClick={() => history.push(`/dashboard`)} className="btn btn-warning font-weight-bold">Today</button>
+          <div className="col px-0">
+            <div className="btn btn-group pl-0" type="group">
+              <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)} className="btn btn-warning font-weight-bold">Previous</button>
+              <button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)} className="btn btn-warning font-weight-bold">Next</button>
+              <button type="button" onClick={() => history.push(`/dashboard`)} className="btn btn-warning font-weight-bold">Today</button>
+            </div>
           </div>
-        </div>
         </div>
       </div>
       <div className="dashboard-container row bg-light mx-0">

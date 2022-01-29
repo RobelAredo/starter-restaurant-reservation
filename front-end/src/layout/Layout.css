@@ -71,7 +71,7 @@ form input {
   width: 100%;
 }
 
-form button {
+form button, .btn {
   width: 70px;
 }
 
@@ -144,13 +144,22 @@ input:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+.alert {
+  opacity: .6;
+}
+
 @media all and (min-width: 480px) {
   form.table {
     display: flex;
     justify-content: center;
   }
-}
 
-.alert {
-  opacity: .6;
+  .actions {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    border: none;
+  }
 }
